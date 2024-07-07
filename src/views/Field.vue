@@ -66,26 +66,49 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
                 </div>
 
                 <Input
+                  v-if="['text', 'number', 'email', 'phone'].includes(fields.type?.id)"
                   class="w-full mt-2"
                   :placehoder="fields.placeholder"
                   :type="fields.type?.id"
                 />
 
-                <!-- <textarea
+                <textarea
+                  v-else-if="fields.type?.id === 'textarea'"
                   class="w-full mt-2 border text-sm placeholder:text-base-40 border-base-30 rounded-lg small-scroll shadow-1 py-2.5 px-4 resize-none min-h-[80px]"
-                ></textarea> -->
-                <!-- <div class="flex items-center gap-4 mt-4">
-                  <RadioToggle :label="'option'" :name="'radio'" />
+                ></textarea>
+                <div class="flex items-center gap-4 mt-4" v-else-if="fields.type?.id === 'radio'">
+                  <RadioToggle
+                    v-for="(option, index) in fields.options"
+                    :key="index"
+                    :label="option.label"
+                    :name="fields.label"
+                  />
                 </div>
-                <div class="flex items-center gap-4 mt-4">
-                  <CheckBox :label="'Checkbox'" :name="'fields.label'" />
+                <div
+                  class="flex items-center gap-4 mt-4"
+                  v-else-if="fields.type?.id === 'checkbox'"
+                >
+                  <CheckBox
+                    v-for="(option, index) in fields.options"
+                    :key="index"
+                    :label="option.label"
+                    :name="fields.label"
+                  />
                 </div>
 
                 <select
+                  v-else-if="fields.type?.id === 'select'"
                   class="sass-ui mt-2 text-sm border border-base-30 pl-4 py-[7px] pr-8 w-full rounded-lg"
                 >
-                  <option value="">Select</option>
-                </select> -->
+                  <option value="">{{ fields.placeholder }}</option>
+                  <option
+                    v-for="(option, index) in fields.options"
+                    :key="index"
+                    :value="option.label"
+                  >
+                    {{ option.label }}
+                  </option>
+                </select>
                 <p class="text-base-60 mt-2 text-xs">{{ fields.hint }}</p>
               </div>
               <div
@@ -96,6 +119,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
                 <button
                   class="text-alert-red hover:text-alert-red/90"
                   v-if="!['name', 'email'].includes(fields.slug)"
+                  @click="formStore.removeFormField(formIndex)"
                 >
                   <DeleteSvg />
                 </button>
@@ -140,7 +164,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
         >
         <Input class="w-full mt-1.5" placeholder="Label" type="text" v-model="formField.label" />
       </fieldset>
-      <fieldset class="">
+      <fieldset class="" v-if="!['checkbox', 'radio'].includes(formField.type?.id)">
         <label for="field_name" class="text-sm font-semibold text-base-100">Placeholder</label>
         <Input
           class="w-full mt-1.5"
@@ -150,21 +174,34 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
         />
       </fieldset>
 
-      <!-- <fieldset class="">
+      <fieldset class="" v-if="['checkbox', 'radio', 'select'].includes(formField.type?.id)">
         <label for="field_name" class="text-sm font-semibold text-base-100">Options</label>
-        <div class="mt-1.5 flex items-center gap-4">
-          <Input class="w-full flex-1" type="text" />
-          <span class="text-alert-red text-alert-red/90 cursor-pointer">
+        <div
+          class="mt-1.5 flex items-center gap-4"
+          v-for="(option, index) in formField.options"
+          :key="index"
+        >
+          <Input
+            v-model="option.label"
+            class="w-full flex-1"
+            type="text"
+            :placeholder="`Option ${index + 1}`"
+          />
+          <span
+            class="text-alert-red text-alert-red/90 cursor-pointer"
+            @click="formStore.removeOption(index)"
+          >
             <CrossSvg class="w-[18px]" />
           </span>
         </div>
 
         <button
           class="mt-4 flex items-center gap-1.5 hover:gap-2 text-primary-100 hover:text-primary-100/90 font-medium text-sm"
+          @click="formStore.addOption"
         >
           <AddSvg /> Add new option
         </button>
-      </fieldset> -->
+      </fieldset>
 
       <fieldset class="">
         <label for="field_name" class="text-sm font-semibold text-base-100">Description</label>

@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useformStore = defineStore('form', () => {
@@ -110,11 +110,39 @@ export const useformStore = defineStore('form', () => {
     fieldModal.value = !fieldModal.value
   }
 
+  const addOption = () => {
+    formField.value.options.push({
+      label: ''
+    })
+  }
+
+  watch(
+    () => formField.value.type?.id,
+    (newValue) => {
+      if (['radio', 'checkbox', 'select'].includes(newValue)) {
+        addOption()
+        addOption()
+        return
+      }
+
+      formField.value.options = []
+    }
+  )
+  const removeOption = (index) => {
+    formField.value.options.splice(index, 1)
+  }
+  const removeFormField = (index) => {
+    custom_field.value.form_fields.splice(index, 1)
+  }
+
   return {
     formFieldTypes,
     custom_field,
+    addOption,
+    removeOption,
     fieldModal,
     formField,
+    removeFormField,
     formEdit,
     toggleFieldModal,
     addFormField
