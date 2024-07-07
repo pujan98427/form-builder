@@ -24,18 +24,18 @@ function addNewForm() {
 <template>
   <!-- <Header /> -->
 
-  <section class="max-w-[1139px] p-8 bg-white ml-auto 2xl:mx-auto">
-    <div class="flex items-center justify-between">
-      <h2 class="text-3xl">All Forms</h2>
+  <section class="max-w-[1139px] p-8 bg-white mx-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <!-- <h2 class="text-3xl">All Forms</h2> -->
 
       <Button classes="py-[11px] gap-2 inline-flex  px-6  text-sm" @click="addNewForm">
         <span class="inline-flex">
           <AddSvg />
         </span>
-        Add New Form
+        Create New Form
       </Button>
     </div>
-    <div
+    <!-- <div
       class="text-left bg-white mt-8 border border-base-20 rounded-lg small-v-scroll max-[1200px]:overflow-x-auto max-[1200px]:overflow-y-hidden"
     >
       <table class="w-full rounded-lg">
@@ -135,7 +135,7 @@ function addNewForm() {
             </td>
           </tr>
         </tbody>
-        <!-- <transition
+        <transition
             enter-active-class="transition ease-out duration-100"
             enter-from-class="transform opacity-0 scale-95"
             enter-to-class="transform opacity-100 scale-100"
@@ -144,9 +144,9 @@ function addNewForm() {
             leave-to-class="transform opacity-0 scale-95"
           >
             <DeleteModal v-if="show_delete_modal" @cancelDelete="cancelDelete" />
-          </transition> -->
+          </transition> 
       </table>
-    </div>
+    </div> -->
     <!-- </template> -->
   </section>
 </template>
