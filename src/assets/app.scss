@@ -1,0 +1,211 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-white font-normal text-base-100;
+    font-family: "Inter", "sans-serif";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-semibold;
+    @apply text-base-100;
+}
+
+// select
+select.sass-ui {
+    line-height: 2;
+    /* 28px */
+    box-shadow: none;
+    -webkit-appearance: none;
+    background: #fff url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%237D89AF' stroke-width='1.67' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A") no-repeat right 16px top 55%;
+    background-size: 12px 12px;
+    cursor: pointer;
+    vertical-align: middle;
+
+    option {
+
+        &:hover,
+        &:checked {
+            @apply bg-primary-100 text-white;
+        }
+    }
+}
+
+// v select
+.v-select {
+    --vs-controls-color: #7d89af;
+
+    .vs__open-indicator {
+        --vs-controls-size: 0.75;
+    }
+}
+
+.vs__dropdown-toggle {
+    --vs-dropdown-option--active-bg: #2a85ff;
+    --vs-border-color: #dcdfea;
+    --vs-search-input-placeholder-color: #b9c0d4;
+    --vs-border-radius: 8px;
+}
+
+.vs--open .vs__dropdown-toggle {
+    border-bottom-color: #dcdfea !important;
+    --vs-border-radius: 8px;
+    border-bottom-left-radius: var(--vs-border-radius) !important;
+    border-bottom-right-radius: var(--vs-border-radius) !important;
+    border-radius: var(--vs-border-radius) !important;
+    outline: 1px solid #2a85ff;
+    box-shadow:
+        0px 0px 0px 4px #dceafc,
+        0px 1px 2px 0px rgba(42, 133, 255, 0.05) !important;
+}
+
+.vs__dropdown-toggle {
+    padding: 0 !important;
+    // height: 44px;
+    @apply shadow-1;
+}
+
+.vs__dropdown-toggle .vs__search::placeholder {
+    font-size: 14px;
+}
+
+.vs__search,
+.vs__dropdown-toggle .vs__search:focus {
+    margin: 0 !important;
+    padding: 11px 16px !important;
+    outline: none !important;
+    box-shadow: none !important;
+    font-size: inherit !important;
+}
+
+.dp__input {
+    --dp-border-radius: 8px;
+    --dp-border-color: #DCDFEA;
+    --dp-font-family: var(--tripCart-fontFamily, "Inter", "sans-serif");
+}
+
+.vs__search,
+.dp__input {
+    min-height: 44px;
+}
+
+.vs__selected {
+    --vs-border-radius: 8px;
+    --vs-selected-bg: #eff1f5;
+    --vs-selected-color: #111322;
+    border: 0 !important;
+    padding: 3px 8px !important;
+    line-height: 1.2 !important;
+    margin: 7px 0.25em !important;
+    display: inline-flex;
+    font-size: inherit !important;
+
+    @apply gap-1 hover:bg-primary-100;
+
+    &:hover {
+        .vs__deselect {
+            --vs-controls-color: #fff;
+        }
+    }
+}
+
+.vs__selected {
+    --vs-border-radius: 8px;
+    --vs-selected-bg: #eff1f5;
+    --vs-selected-color: #111322;
+    border: 0 !important;
+    padding: 3px 8px !important;
+    line-height: 1.2 !important;
+    margin: 7px 0.25em !important;
+    display: inline-flex;
+    font-size: inherit !important;
+
+    @apply gap-1 hover:bg-primary-100;
+
+    &:hover {
+        .vs__deselect {
+            --vs-controls-color: #fff;
+        }
+    }
+}
+
+.vs--multiple {
+    .vs__selected {
+        @apply hover:text-white;
+    }
+}
+
+.vs__clear,
+.vs__deselect {
+    svg {
+        transform: scale(0.8);
+    }
+}
+
+.vs__selected-options {
+    padding: 0 4px !important;
+}
+
+.vs__dropdown-menu {
+    --vs-dropdown-option--active-bg: #2a85ff;
+    --vs-border-color: #eaecf0;
+    --vs-border-radius: 8px;
+    border: 1px solid var(--vs-border-color);
+    top: calc(100% + 3px) !important;
+    border-radius: var(--vs-border-radius) !important;
+    z-index: 9999 !important;
+    padding: 0 !important;
+    @apply overflow-x-hidden shadow-8;
+
+    li {
+        @apply font-medium p-4;
+        font-size: 14px !important;
+        white-space: wrap;
+
+        &:not(:last-child) {
+            @apply border-b border-base-20;
+        }
+    }
+}
+
+.vs__actions {
+    padding: 4px 11px 0 3px !important;
+}
