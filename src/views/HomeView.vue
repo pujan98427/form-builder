@@ -24,7 +24,7 @@ function addNewForm() {
 <template>
   <!-- <Header /> -->
 
-  <section class="max-w-[1139px] p-8 bg-white mx-auto">
+  <section class="max-w-[1139px] bg-white mx-auto">
     <div class="flex items-center justify-center min-h-screen">
       <!-- <h2 class="text-3xl">All Forms</h2> -->
 
