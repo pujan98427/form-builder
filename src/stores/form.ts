@@ -1,5 +1,6 @@
 import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
+import { useLocalStorage } from '@vueuse/core'
 
 export const useformStore = defineStore('form', () => {
   const fieldModal = ref<boolean>(false)
@@ -39,7 +40,10 @@ export const useformStore = defineStore('form', () => {
       id: 'select'
     }
   ])
-  const custom_field = ref({
+  const custom_field = useLocalStorage('customField', {
+    title: '',
+    slug: '',
+    is_active: true,
     form_fields: [
       {
         label: 'Your Name',
@@ -70,7 +74,7 @@ export const useformStore = defineStore('form', () => {
     ]
   })
 
-  const formField = ref({
+  const formField = useLocalStorage('formField', {
     label: '',
     slug: '',
     type: {},

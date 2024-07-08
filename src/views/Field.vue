@@ -31,7 +31,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
       </div>
 
       <div class="flex-1">
-        <Input class="w-full" placeholder="Form name" type="string" />
+        <Input class="w-full" placeholder="Form name" type="string" v-model="custom_field.title" />
       </div>
     </div>
 
@@ -114,7 +114,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
               <div
                 class="basis-[194px] inline-flex gap-2 items-center justify-center bg-base-10 border-l border-base-30"
               >
-                <SwitchToggle v-model="fields.is_active" />
+                <SwitchToggle v-model="custom_field.form_fields[formIndex].is_active" />
                 <Button :outline="true" @click="formStore.formEdit(formIndex)"> Edit </Button>
                 <button
                   class="text-alert-red hover:text-alert-red/90"
@@ -131,7 +131,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
     </div>
 
     <button
-      class="mt-6 underline-offset-4 font-medium hover:underline-offset-[6px] underline text-primary-100 hover:text-primary-100/90"
+      class="mt-6 underline-offset-4 transition-all duration-300 ease-in-out font-medium hover:underline-offset-[6px] underline text-primary-100 hover:text-primary-100/90"
       @click="formStore.toggleFieldModal"
     >
       Add more fields
@@ -177,7 +177,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
       <fieldset class="" v-if="['checkbox', 'radio', 'select'].includes(formField.type?.id)">
         <label for="field_name" class="text-sm font-semibold text-base-100">Options</label>
         <div
-          class="mt-1.5 flex items-center gap-4"
+          class="mt-1.5 flex items-center gap-4 transition-all duration-300 ease-in-out"
           v-for="(option, index) in formField.options"
           :key="index"
         >
@@ -196,7 +196,7 @@ const { formFieldTypes, custom_field, fieldModal, formField, addFormField } = st
         </div>
 
         <button
-          class="mt-4 flex items-center gap-1.5 hover:gap-2 text-primary-100 hover:text-primary-100/90 font-medium text-sm"
+          class="mt-4 flex items-center gap-1.5 transition-all duration-300 ease-in-out hover:gap-2 text-primary-100 hover:text-primary-100/90 font-medium text-sm"
           @click="formStore.addOption"
         >
           <AddSvg /> Add new option
